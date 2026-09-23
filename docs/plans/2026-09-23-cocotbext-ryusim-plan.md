@@ -18,7 +18,7 @@
 | 6 | Runner flow: `RyuSim(Runner)` + registration | done | yes | no |
 | 7 | pytest flow: plugin + load-order fix | done | yes | no |
 | 8 | CI workflow + local conformance run | pending | no | no |
-| 9 | README | pending | no | no |
+| 9 | README | done | yes | no |
 | 10 | Release workflow | pending | no | no |
 | 11 | Create GitHub repo, push, CI green (**ask the user first**) | pending | no | no |
 | 12 | Configure trusted publishing (**done by the user**) | pending | no | no |

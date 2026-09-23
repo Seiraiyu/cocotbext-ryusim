@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 1"  # weekly, Mondays 03:00 UTC: catches new RyuSim releases
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: smoke (py${{ matrix.python }}, ${{ matrix.cocotb }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.13"]
+        cocotb: ["cocotb==2.1.0", "cocotb>=2.1,<2.2"]  # cap floor, newest under cap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install toolchain, Icarus and RyuSim
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang cmake iverilog
+          curl -fsSL https://ryusim.seiraiyu.com/install.sh | bash
+          echo "$HOME/.ryusim/bin" >> "$GITHUB_PATH"
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install "${{ matrix.cocotb }}" -e ".[test]"
+      - name: Versions
+        run: |
+          ryusim --version
+          python -c "import cocotb; print('cocotb', cocotb.__version__)"
+      - run: pytest -v
+
+  conformance:
+    # cocotb's full Verilog regression through this package (§7.2). It takes
+    # about 10 minutes, so it runs on main and weekly, not on every PR.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install toolchain and RyuSim
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang cmake
+          curl -fsSL https://ryusim.seiraiyu.com/install.sh | bash
+          echo "$HOME/.ryusim/bin" >> "$GITHUB_PATH"
+      - name: Install cocotb and this package
+        run: pip install "cocotb>=2.1,<2.2" .
+      - name: Check out cocotb's test suite at the installed version
+        run: |
+          V=$(python -c "import cocotb; print(cocotb.__version__)")
+          git clone --depth 1 --branch "v$V" https://github.com/cocotb/cocotb.git cocotb-src
+      - name: Install cocotb's test dependencies (psutil, pexpect, ...)
+        run: |
+          python -m pip install --upgrade pip  # --group needs pip >= 25.1
+          pip install --group cocotb-src/pyproject.toml:test_common
+      - name: Make RyuSim visible to cocotb's stock test Makefiles
+        # CI-only: users never do this (§5.1). cocotb's test Makefiles use the
+        # stock include, which only searches cocotb's own install dir.
+        run: |
+          cp "$(cocotbext-ryusim-config --makefiles)/simulators/Makefile.ryusim" \
+             "$(cocotb-config --makefiles)/simulators/"
+      - name: Run cocotb's Verilog regression
+        working-directory: cocotb-src
+        env:
+          SIM: ryusim
+          TOPLEVEL_LANG: verilog
+          # Stock Makefile.inc doesn't know ryusim; our shim sets this for users.
+          COCOTB_TRUST_INERTIAL_WRITES: "1"
+        run: make -k test

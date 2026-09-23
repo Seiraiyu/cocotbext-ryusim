@@ -76,4 +76,7 @@ jobs:
           TOPLEVEL_LANG: verilog
           # Stock Makefile.inc doesn't know ryusim; our shim sets this for users.
           COCOTB_TRUST_INERTIAL_WRITES: "1"
+          # cocotb's test_ci.test_python_version runs under GITHUB_ACTIONS and
+          # expects its CI to export this; keep in step with setup-python above.
+          PYTHON_VERSION: "3.12"
         run: make -k test

@@ -1,0 +1,37 @@
+# Copyright (c) 2026 Seiraiyu
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# Drop-in replacement for cocotb's Makefile.sim that adds SIM=ryusim.
+# Every other SIM is handed to cocotb's own Makefile.sim unchanged.
+#
+#   include $(shell cocotbext-ryusim-config --makefiles)/Makefile.sim
+
+COCOTBEXT_RYUSIM_MAKEFILES_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+
+SIM ?= icarus
+
+ifneq ($(shell echo $(SIM) | tr A-Z a-z),ryusim)
+
+include $(shell cocotb-config --makefiles)/Makefile.sim
+
+else
+
+# Mirrors the preamble of cocotb 2.1's Makefile.sim. The first target is make's
+# default goal, so "all: sim" must come before Makefile.inc defines any target.
+.PHONY: all
+all: sim
+
+PYTHON_BIN_RES := $(shell cocotb-config --python-bin 2>>/dev/null; echo $$?)
+PYTHON_BIN_RC := $(lastword $(PYTHON_BIN_RES))
+PYTHON_BIN := $(strip $(subst $(PYTHON_BIN_RC)QQQQ,,$(PYTHON_BIN_RES)QQQQ))
+ifneq ($(PYTHON_BIN_RC),0)
+    PYTHON_BIN := python3
+endif
+
+# Must precede Makefile.inc, which defaults unknown simulators to 0.
+COCOTB_TRUST_INERTIAL_WRITES ?= 1
+
+include $(shell $(PYTHON_BIN) -m cocotb_tools.config --makefiles)/Makefile.inc
+include $(COCOTBEXT_RYUSIM_MAKEFILES_DIR)/simulators/Makefile.ryusim
+
+endif

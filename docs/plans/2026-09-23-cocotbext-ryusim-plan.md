@@ -10,11 +10,11 @@
 
 | Task | Description | Status | Tested | Pushed |
 |------|-------------|--------|--------|--------|
-| 1 | Dev environment: clean venv with cocotb 2.1.0, RyuSim, Icarus | pending | no | no |
-| 2 | Packaging scaffold | pending | no | no |
-| 3 | Smoke-test DUT and testbenches | pending | no | no |
-| 4 | `cocotbext-ryusim-config` CLI | pending | no | no |
-| 5 | Makefile flow: shim + `Makefile.ryusim` | pending | no | no |
+| 1 | Dev environment: clean venv with cocotb 2.1.0, RyuSim, Icarus | done | yes | no |
+| 2 | Packaging scaffold | done | yes | no |
+| 3 | Smoke-test DUT and testbenches | done | yes | no |
+| 4 | `cocotbext-ryusim-config` CLI | done | yes | no |
+| 5 | Makefile flow: shim + `Makefile.ryusim` | done | yes | no |
 | 6 | Runner flow: `RyuSim(Runner)` + registration | pending | no | no |
 | 7 | pytest flow: plugin + load-order fix | pending | no | no |
 | 8 | CI workflow + local conformance run | pending | no | no |

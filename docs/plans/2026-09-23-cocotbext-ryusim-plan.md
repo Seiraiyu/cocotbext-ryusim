@@ -10,17 +10,17 @@
 
 | Task | Description | Status | Tested | Pushed |
 |------|-------------|--------|--------|--------|
-| 1 | Dev environment: clean venv with cocotb 2.1.0, RyuSim, Icarus | done | yes | no |
-| 2 | Packaging scaffold | done | yes | no |
-| 3 | Smoke-test DUT and testbenches | done | yes | no |
-| 4 | `cocotbext-ryusim-config` CLI | done | yes | no |
-| 5 | Makefile flow: shim + `Makefile.ryusim` | done | yes | no |
-| 6 | Runner flow: `RyuSim(Runner)` + registration | done | yes | no |
-| 7 | pytest flow: plugin + load-order fix | done | yes | no |
-| 8 | CI workflow + local conformance run | done | yes (local) | no |
-| 9 | README | done | yes | no |
-| 10 | Release workflow | done | yes | no |
-| 11 | Create GitHub repo, push, CI green (**ask the user first**) | pending | no | no |
+| 1 | Dev environment: clean venv with cocotb 2.1.0, RyuSim, Icarus | done | yes | yes |
+| 2 | Packaging scaffold | done | yes | yes |
+| 3 | Smoke-test DUT and testbenches | done | yes | yes |
+| 4 | `cocotbext-ryusim-config` CLI | done | yes | yes |
+| 5 | Makefile flow: shim + `Makefile.ryusim` | done | yes | yes |
+| 6 | Runner flow: `RyuSim(Runner)` + registration | done | yes | yes |
+| 7 | pytest flow: plugin + load-order fix | done | yes | yes |
+| 8 | CI workflow + local conformance run | done | yes | yes |
+| 9 | README | done | yes | yes |
+| 10 | Release workflow | done | yes | yes |
+| 11 | Create GitHub repo, push, CI green (**ask the user first**) | done | yes | yes |
 | 12 | Configure trusted publishing (**done by the user**) | pending | no | no |
 | 13 | Tag v0.1.0, verify install from PyPI (**ask the user first**) | pending | no | no |
 

@@ -29,6 +29,9 @@ Issues = "https://github.com/Seiraiyu/cocotbext-ryusim/issues"
 [project.scripts]
 cocotbext-ryusim-config = "cocotbext.ryusim.config:main"
 
+[project.entry-points.pytest11]
+cocotbext_ryusim = "cocotbext.ryusim._pytest_plugin"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/cocotbext"]
 

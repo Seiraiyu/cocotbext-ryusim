@@ -16,7 +16,7 @@
 | 4 | `cocotbext-ryusim-config` CLI | done | yes | no |
 | 5 | Makefile flow: shim + `Makefile.ryusim` | done | yes | no |
 | 6 | Runner flow: `RyuSim(Runner)` + registration | done | yes | no |
-| 7 | pytest flow: plugin + load-order fix | pending | no | no |
+| 7 | pytest flow: plugin + load-order fix | done | yes | no |
 | 8 | CI workflow + local conformance run | pending | no | no |
 | 9 | README | pending | no | no |
 | 10 | Release workflow | pending | no | no |

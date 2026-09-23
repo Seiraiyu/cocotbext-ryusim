@@ -246,7 +246,7 @@ This job tests RyuSim running on stock cocotb through the stock Verilator VPI li
 |-------|-------------|--------|--------|--------|
 | 1 | Scaffold (`pyproject.toml`, LICENSE, namespace layout), shared smoke DUT, Makefile flow: shim, `Makefile.ryusim`, `cocotbext-ryusim-config`, `test_make_flow` including the SIM=icarus forwarding case | done | yes | no |
 | 2 | Runner flow: `RyuSim(Runner)`, registration on import, symbol-check error, `test_runner_flow` | done | yes | no |
-| 3 | pytest flow: reproduce the `_OPTIONS` load-order hazard in both orders, then the `pytest11` plugin and fix, `test_pytest_flow` in both orders. Stop and revisit if the fix doesn't hold. | pending | no | no |
+| 3 | pytest flow: reproduce the `_OPTIONS` load-order hazard in both orders, then the `pytest11` plugin and fix, `test_pytest_flow` in both orders. Stop and revisit if the fix doesn't hold. | done | yes | no |
 | 4 | CI: `ci.yml` with the smoke matrix and the conformance job (§7.2) | pending | no | no |
 | 5 | README: install, the one-line include change, Runner and pytest usage, the explicit `--cocotb-simulator ryusim` note, the unsupported-construct list, and the cocotb version policy | pending | no | no |
 | 6 | Release: create `Seiraiyu/cocotbext-ryusim` on GitHub, configure trusted publishing, run the TestPyPI dry run, publish `0.1.0` | pending | no | no |

@@ -249,4 +249,4 @@ This job tests RyuSim running on stock cocotb through the stock Verilator VPI li
 | 3 | pytest flow: reproduce the `_OPTIONS` load-order hazard in both orders, then the `pytest11` plugin and fix, `test_pytest_flow` in both orders. Stop and revisit if the fix doesn't hold. | done | yes | yes |
 | 4 | CI: `ci.yml` with the smoke matrix and the conformance job (§7.2) | done | yes | yes |
 | 5 | README: install, the one-line include change, Runner and pytest usage, the explicit `--cocotb-simulator ryusim` note, the unsupported-construct list, and the cocotb version policy | done | yes | yes |
-| 6 | Release: create `Seiraiyu/cocotbext-ryusim` on GitHub, configure trusted publishing, run the TestPyPI dry run, publish `0.1.0` | pending | no | no |
+| 6 | Release: create `Seiraiyu/cocotbext-ryusim` on GitHub, configure trusted publishing, run the TestPyPI dry run, publish `0.1.0` | done | yes | yes |

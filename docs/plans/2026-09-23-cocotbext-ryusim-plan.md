@@ -22,7 +22,7 @@
 | 10 | Release workflow | done | yes | yes |
 | 11 | Create GitHub repo, push, CI green (**ask the user first**) | done | yes | yes |
 | 12 | Configure trusted publishing (**done by the user**) | done | yes | yes |
-| 13 | Tag v0.1.0, verify install from PyPI (**ask the user first**) | pending | no | no |
+| 13 | Tag v0.1.0, verify install from PyPI (**ask the user first**) | done | yes | yes |
 
 After each phase completes, also update the phase table in the design doc (§10).
 

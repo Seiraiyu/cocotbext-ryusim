@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cocotbext-ryusim"
+version = "0.1.0"
+description = "RyuSim simulator support for cocotb"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Seiraiyu" }]
+dependencies = ["cocotb>=2.1,<2.2"]
+classifiers = [
+    "Framework :: cocotb",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/Seiraiyu/cocotbext-ryusim"
+Issues = "https://github.com/Seiraiyu/cocotbext-ryusim/issues"
+
+[project.scripts]
+cocotbext-ryusim-config = "cocotbext.ryusim.config:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cocotbext"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
